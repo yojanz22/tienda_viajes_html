@@ -1,0 +1,62 @@
+{% extends 'app/tienda_base.html' %}
+
+{% block contenido %}
+
+{% block js %}
+<script>
+  function eliminar_venta(id) {
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: 'Esta acción no se puede deshacer',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    })
+    .then(function(result) {
+        if (result.isConfirmed) {
+            window.location.href = "/eliminar-venta/" + id + "/";
+        }
+    });
+}
+</script>
+{% endblock %}
+
+{% load humanize %}
+
+<br>
+<br>
+<br>
+<div class="card">
+  <div class="card-body">
+    <h3>Historial De Ventas</h3>
+    <hr>
+    <table class="table table-striped table-hover table-responsive-sm">
+      <tr>
+        <th>ID</th>
+        <th>Carrito</th>  
+        <th>Fecha</th>  
+        <th>Cantidad de productos</th>
+        <th>Acciones</th>
+      </tr>
+      {% for venta in ventas %}
+      <tr>
+        <td>{{ venta.id }}</td>
+        <td>{{ venta.carrito }}</td>
+        <td>{{ venta.fecha }}</td>
+        <td>{{ venta.cantidad_productos }}</td>
+        <td>
+          <a href="{% url 'orden_b' venta.id %}" class="btn btn-primary btn-sm">Aceptar</a>
+          {% if perms.app.delete_venta %}
+          <a href="#" onclick="eliminar_venta({{ venta.id }})" class="btn btn-danger btn-sm">Rechazar</a>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+{% endblock %}

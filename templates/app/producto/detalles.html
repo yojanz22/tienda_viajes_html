@@ -1,0 +1,43 @@
+{% extends 'app/tienda_base.html' %}
+
+{% load static %}
+
+{% block js %} 
+    <!-- ALL JS FILES -->
+    <script src="{% static 'app/js/all.js' %}"></script>
+    <script src="{% static 'app/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'app/js/custom.js' %}"></script>
+    <script src="{% static 'app/js/modernizer.js' %}"></script>
+{% endblock %}
+
+{% block css %} 
+    <link rel="stylesheet" href="{% static 'app/css/detalles.css' %}">
+    <link rel="stylesheet" href="{% static 'app/css/bootstrap.min.css' %}">
+<!-- Site CSS -->
+<link rel="stylesheet" href="{% static 'app/css/style.css' %}">
+<!-- Responsive CSS -->
+<link rel="stylesheet" href="{% static 'app/css/responsive.css' %}">
+    
+{% endblock %}
+
+{% block contenido %}
+<div class="detalles-container">
+    <div class="detalles-imagen">
+      <img src="{{ producto.imagen.url }}" alt="imagen producto">
+    </div>
+    <div class="detalles-info">
+      <div class="detalles-titulo">
+        <h2>{{ producto.nombre }}</h2>
+      </div>
+      <div class="detalles-precio-marca">
+        <h3 class="precio">Precio: {{ producto.precio }}</h3>
+        <h3>Marca: {{ producto.marca }}</h3>
+      </div>
+      <button class="btn-agregar">Agregar al carrito</button>
+    </div>
+  </div>
+  <div class="descripcion-container">
+    <p>Descripción: {{ producto.descripcion }}</p>
+  </div>
+  
+{% endblock %}

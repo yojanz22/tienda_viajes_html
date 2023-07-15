@@ -1,0 +1,75 @@
+{% extends 'app/tienda_base.html' %}
+
+{% load static %}
+
+{% block css %} 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+<link rel="stylesheet" href="{% static 'app/css/tienda.css' %}">
+{% endblock %}
+
+{% block contenido %}
+
+
+<div class="productos">
+    {% for p in marca %}
+    <div class="producto">
+        <div class="contenedor_producto">
+            {% if p.imagen %}
+            <div class="imagen">
+                <img src="{{ p.imagen.url }}" alt="imagen producto">
+            </div>
+            {% endif %}
+            <div class="detalle">
+                <h5>{{ p.marca | capfirst }}</h5>
+                <h2>{{ p.nombre | title }}</h2>
+                <h3>{{ p.precio }}</h3>
+                <button class="btn-agregar" onclick="agregarAlCarrito('{{ p.nombre }}', {{ p.precio }})">Agregar al carrito</button>
+                <button class="btn-ver-mas" onclick="window.location.href='{% url 'detalle_producto' p.id %}'">Ver más</button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+<script>
+    function agregarAlCarrito(nombre, precio) {
+        // Obtener el carrito existente (si lo hay)
+        let carrito = localStorage.getItem('carrito');
+        if (carrito) {
+            // Si el carrito ya existe, convertirlo de JSON a objeto JavaScript
+            carrito = JSON.parse(carrito);
+        } else {
+            // Si el carrito no existe, crear un nuevo objeto vacío
+            carrito = {};
+        }
+        
+        // Verificar si el producto ya está en el carrito
+        if (carrito[nombre]) {
+            // Si el producto ya está en el carrito, aumentar la cantidad
+            carrito[nombre].cantidad += 1;
+        } else {
+            // Si el producto no está en el carrito, agregarlo con cantidad 1
+            carrito[nombre] = {
+                precio: precio,
+                cantidad: 1
+            };
+        }
+        
+        // Guardar el carrito actualizado en el almacenamiento local
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+        
+        // Actualizar la vista del carrito con la nueva información
+        actualizarVistaCarrito();
+        
+        // Opcional: Mostrar un mensaje o realizar otras acciones después de agregar al carrito
+        alert('El producto "' + nombre + '" se ha agregado al carrito.');
+    }
+    
+    function actualizarVistaCarrito() {
+        // Lógica para actualizar la vista del carrito con la información actualizada
+        // Por ejemplo, puedes utilizar JavaScript para manipular los elementos HTML y mostrar los productos y el total
+    }
+</script>
+
+{% endblock %}

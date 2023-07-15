@@ -1,0 +1,52 @@
+{% extends 'app/tienda_base.html' %}
+
+{% block contenido %}
+
+{% block js %}
+<script>
+    function eliminar_venta(id) {
+        // Código JavaScript para eliminar una venta
+    }
+</script>
+{% endblock %}
+
+{% load humanize %}
+
+<br>
+<br>
+<br>
+<div class="card">
+    <div class="card-body">
+        <h3>Orden de pedidos</h3>
+        <hr>
+        <table class="table table-striped table-hover table-responsive-sm">
+            <tr>
+                <th>ID</th>
+                <th>Carrito</th>
+                <th>Fecha</th>
+                <th>Cantidad de productos</th>
+                <th>instrucciones</th>
+                <th>Listo</th>
+            </tr>
+            {% for venta_editada in venta %}
+            <tr>
+                <td>{{ venta_editada.id }}</td>
+                <td>{{ venta_editada.carrito }}</td>
+                <td>{{ venta_editada.fecha }}</td>
+                <td>{{ venta_editada.cantidad_productos }}</td>
+                <td>{{ venta_editada.otro_texto }}</td>
+
+                    <button class="btn btn-success btn-sm">Aceptar</button>
+                    {% if perms.app.delete_venta %}
+                    <a href="#" onclick="eliminar_venta({{ venta_editada.id }})" class="btn btn-danger btn-sm">Rechazar</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        
+        
+    </div>
+</div>
+
+{% endblock %}

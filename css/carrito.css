@@ -1,0 +1,50 @@
+#contenedor-carrito {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 8rem;
+  padding: 1rem;
+}
+
+.producto-carrito {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: #f2f2f2;
+  border-radius: 0.5rem;
+}
+
+.producto-carrito h5 {
+  margin: 0;
+  flex-grow: 1;
+}
+
+.producto-carrito button {
+  margin-left: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+
+.producto-carrito button:hover {
+  background-color: #45a049;
+}
+
+.total-carrito {
+  font-size: 2rem; /* Ajusta el tamaño de fuente según tu preferencia */
+  background-color: white; /* Cambia el color de fondo a blanco */
+  color: black; /* Cambia el color del texto a negro */
+  padding: 1rem; /* Agrega un espacio interno para separar el contenido */
+  border-radius: 0.5rem; /* Agrega bordes redondeados */
+  margin-top: 1rem; /* Agrega margen superior para separarlo de los productos */
+}
+
+.realizar-pago-btn {
+  color: black; /* Cambia el color del texto a negro */
+}
